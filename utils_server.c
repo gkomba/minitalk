@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   utils_server.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gildo <gildo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 16:38:45 by gildo             #+#    #+#             */
-/*   Updated: 2024/07/27 13:44:30 by gildo            ###   ########.fr       */
+/*   Created: 2024/07/27 13:08:06 by gildo             #+#    #+#             */
+/*   Updated: 2024/07/27 13:35:26 by gildo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "minitalk.h"
 
-//#include "libft/libft.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
+void	ft_get_signal(int signal, siginfo_t *info, void *context)
+{
+	static char		c;
+	static int		i;
 
-void	ft_get_signal(int signal, siginfo_t *info, void *context);
-void	ft_send_bit(pid_t pid, unsigned char chr);
-void	ft_send_signal(pid_t pid, char *str);
-void	ft_recived(int signal);
-
-#endif
+	if (signal == SIGUSR2)
+		c = (c * 2);
+	else if (signal == SIGUSR1)
+		c = ((c * 2) + 1);
+	i++;
+	if (i == 8)
+	{
+		write(1, &c, 1);
+		if (c == '\0')
+		{
+			write(1, "\n", 1);
+			printf("%d\n", info->si_pid);
+		}
+		c = 0;
+		i = 0;
+	}
+	kill(info->si_pid, SIGUSR1);
+}
