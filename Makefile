@@ -59,7 +59,7 @@ git: fclean
 clean:
 	@make clean -s -C ${PRINTF}
 	@make clean -s -C ${LIBFT}
-	@${RM} ${CLIENT_OBJS} ${CLIENT_OBJS}
+	@${RM} ${CLIENT_OBJS} ${SERVER_OBJS}
 
 fclean: clean
 	@make fclean -s -C ${PRINTF}
