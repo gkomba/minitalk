@@ -23,7 +23,7 @@ void	ft_send_bit(pid_t pid, unsigned char chr)
 			kill(pid, SIGUSR1);
 		else if (((chr >> i) & 1) == 0)
 			kill(pid, SIGUSR2);
-		usleep(1000);
+		usleep(100);
 	}
 }
 
