@@ -6,7 +6,7 @@
 /*   By: gildo <gildo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:00:20 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/29 12:30:49 by gildo            ###   ########.fr       */
+/*   Updated: 2024/07/29 15:38:50 by gildo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ int	main(int argc, char **argv)
 		ft_printf("\t<invalid arguments>\n");
 		ft_printf("\t  <PID> <STRING>\n");
 	}
+	exit(0);
 }
