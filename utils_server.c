@@ -12,11 +12,12 @@
 
 #include "minitalk.h"
 
-void	ft_get_signal(int signal, siginfo_t *info)
+void	ft_get_signal(int signal, siginfo_t *info, void *context)
 {
 	static char		c;
 	static int		i;
 
+	(void)context;
 	if (signal == SIGUSR2)
 		c = (c * 2);
 	else if (signal == SIGUSR1)

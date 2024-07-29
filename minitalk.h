@@ -20,7 +20,7 @@
 # include <signal.h>
 # include <stdlib.h>
 
-void	ft_get_signal(int signal, siginfo_t *info);
+void	ft_get_signal(int signal, siginfo_t *info, void *context);
 void	ft_send_bit(pid_t pid, unsigned char chr);
 void	ft_send_signal(pid_t pid, char *str);
 void	ft_recived(int signal);
