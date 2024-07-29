@@ -92,7 +92,7 @@ clean:
 clean_b:
 	@make clean -s -C ${PRINTF}
 	@make clean -s -C ${LIBFT}
-	@${RM} ${CLIENT_BOUNS_OBJS} ${SERVER_BONUS_OBJS}
+	@${RM} ${CLIENT_BONUS_OBJS} ${SERVER_BONUS_OBJS}
 
 fclean: clean
 	@make fclean -s -C ${PRINTF}
