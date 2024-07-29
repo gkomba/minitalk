@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkomba <<marvin@42.fr> >                   +#+  +:+       +#+        */
+/*   By: gildo <gildo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:00:20 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 14:43:42 by gkomba           ###   ########.fr       */
+/*   Updated: 2024/07/29 13:16:07 by gildo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk.h"
 
 int	main(int argc, char **argv)
 {
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		pid = ft_atoi(argv[1]);
 		ft_printf("%d\n", getpid());
 		signal(SIGUSR1, ft_recived);
-		ft_send_signal(pid, argv[2]);
+		ft_send_signal_bonus(pid, argv[2]);
 	}
 	else
 	{

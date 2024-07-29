@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_client.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: gildo <gildo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:23:41 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 16:23:43 by gkomba           ###   ########.fr       */
+/*   Updated: 2024/07/29 12:42:00 by gildo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-
-int		g_config_flag;
-
-void	ft_recived(int signal)
-{
-	g_config_flag = 1;
-	(void)signal;
-}
+#include "../include/minitalk.h"
 
 void	ft_send_bit(pid_t pid, unsigned char chr)
 {
@@ -31,9 +23,7 @@ void	ft_send_bit(pid_t pid, unsigned char chr)
 			kill(pid, SIGUSR1);
 		else if (((chr >> i) & 1) == 0)
 			kill(pid, SIGUSR2);
-		while (!g_config_flag)
-			;
-		g_config_flag = 0;
+		usleep(1000);
 	}
 }
 

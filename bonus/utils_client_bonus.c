@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_client.c                                     :+:      :+:    :+:   */
+/*   utils_client_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: gildo <gildo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:23:41 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 16:23:43 by gkomba           ###   ########.fr       */
+/*   Updated: 2024/07/29 15:03:33 by gildo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk.h"
 
 int		g_config_flag;
 
@@ -20,7 +20,7 @@ void	ft_recived(int signal)
 	(void)signal;
 }
 
-void	ft_send_bit(pid_t pid, unsigned char chr)
+void	ft_send_bit_bonus(pid_t pid, unsigned char chr)
 {
 	int	i;
 
@@ -37,15 +37,15 @@ void	ft_send_bit(pid_t pid, unsigned char chr)
 	}
 }
 
-void	ft_send_signal(pid_t pid, char *str)
+void	ft_send_signal_bonus(pid_t pid, char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		ft_send_bit(pid, str[i]);
+		ft_send_bit_bonus(pid, str[i]);
 		i++;
 	}
-	ft_send_bit(pid, '\0');
+	ft_send_bit_bonus(pid, '\0');
 }

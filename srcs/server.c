@@ -3,25 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: gildo <gildo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:16:53 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 17:17:00 by gkomba           ###   ########.fr       */
+/*   Updated: 2024/07/29 12:44:55 by gildo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk.h"
 
 int	main(void)
 {
-	struct sigaction	data;
-
-	data.sa_sigaction = &ft_get_signal;
-	data.sa_flags = SA_SIGINFO;
-	ft_printf("PID: %d\n", getpid());
-	sigaction(SIGUSR2, &data, NULL);
-	sigaction(SIGUSR1, &data, NULL);
 	printf("\t\t<<WELCOME>>\n");
+	ft_printf("SERVER PID: %d\n", getpid());
+	signal(SIGUSR1, ft_get_signal);
+	signal(SIGUSR2, ft_get_signal);
 	while (1)
 		;
 }

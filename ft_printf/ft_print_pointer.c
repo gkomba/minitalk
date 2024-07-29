@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: gildo <gildo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:49:12 by gkomba            #+#    #+#             */
-/*   Updated: 2024/05/23 14:05:31 by gkomba           ###   ########.fr       */
+/*   Updated: 2024/07/29 15:28:44 by gildo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_print_pointer(void *add, int *count)
 	{
 		ft_print_string("(nil)", count);
 		return ;
-	}	
+	}
 	adress = (unsigned long long)add;
 	base = "0123456789abcdef";
 	ft_print_string("0x", count);

@@ -1,4 +1,4 @@
-# **************************************************************************** #
+ # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -10,26 +10,38 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME = minitalk
 CLIENT = client
 SERVER = server
-SRCS_CLIENT = client.c\
-	      utils_client.c\
+CLIENT_BONUS = client_bonus
+SERVER_BONUS = server_bonus
 
-SRCS_SERVER = server.c\
-	     utils_server.c\
+SRCS_CLIENT = srcs/client.c\
+				srcs/utils_client.c\
+
+SRCS_SERVER = srcs/server.c\
+				srcs/utils_server.c\
+
+SRCS_CLIENT_BONUS = bonus/client_bonus.c\
+					bonus/utils_client_bonus.c\
+
+SRCS_SERVER_BONUS = bonus/server_bonus.c\
+					bonus/utils_server_bonus.c\
 
 MAKEFLAGS += -silent
 
 CLIENT_OBJS = ${SRCS_CLIENT:.c=.o}
 SERVER_OBJS = ${SRCS_SERVER:.c=.o}
-CC = gcc
+CLIENT_BONUS_OBJS = ${SRCS_CLIENT_BONUS:.c=.o}
+SERVER_BONUS_OBJS = ${SRCS_SERVER_BONUS:.c=.o}
+CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 PRINTF = ft_printf
 LIBFT = libft
 
-all: ${CLIENT} ${SERVER}
-
+all: ${NAME}
+${NAME}: ${CLIENT} ${SERVER}
 
 ${CLIENT}: ${CLIENT_OBJS}
 	@make -s -C ${PRINTF}
@@ -45,11 +57,27 @@ ${SERVER}: ${SERVER_OBJS}
 	@echo "\033[0;32mSERVER OK!\033[0m"
 	@make clean
 
+b: ${CLIENT_BONUS} ${SERVER_BONUS}
+
+${CLIENT_BONUS}: ${CLIENT_BONUS_OBJS}
+	@make -s -C ${PRINTF}
+	@make -s -C ${LIBFT}
+	@${CC} ${CFLAGS} -o ${CLIENT_BONUS} ${CLIENT_BONUS_OBJS} ${LIBFT}/libft.a ${PRINTF}/libftprintf.a
+	@echo "\033[0;32mCLIENT_BONUS OK!\033[0m"
+	@make clean_b
+
+${SERVER_BONUS}: ${SERVER_BONUS_OBJS}
+	@make -s -C ${PRINTF}
+	@make -s -C ${LIBFT}
+	@${CC} ${CFLAGS} -o ${SERVER_BONUS} ${SERVER_BONUS_OBJS} ${LIBFT}/libft.a ${PRINTF}/libftprintf.a
+	@echo "\033[0;32mSERVER_BONUS OK!\033[0m"
+	@make clean_b
+
 norm:
 	norminette
 	norminette -R CheckForbiddenSourceHeader
 
-git: fclean
+git: fclean fclean_b
 	git status
 	git add .
 	git status
@@ -61,11 +89,23 @@ clean:
 	@make clean -s -C ${LIBFT}
 	@${RM} ${CLIENT_OBJS} ${SERVER_OBJS}
 
+clean_b:
+	@make clean -s -C ${PRINTF}
+	@make clean -s -C ${LIBFT}
+	@${RM} ${CLIENT_BOUNS_OBJS} ${SERVER_BONUS_OBJS}
+
 fclean: clean
 	@make fclean -s -C ${PRINTF}
 	@make fclean -s -C ${LIBFT}
 	@${RM} ${CLIENT} ${SERVER}
 
+fclean_b: clean_b
+	@make fclean -s -C ${PRINTF}
+	@make fclean -s -C ${LIBFT}
+	@${RM} ${CLIENT_BONUS} ${SERVER_BONUS}
+
 re: fclean all
 
-.PHONY: all clean fclean re
+re_b: fclean_b b
+
+.PHONY: all b clean clean_b fclean fclean_b re re_b
