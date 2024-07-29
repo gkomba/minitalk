@@ -16,7 +16,7 @@ static void	ft_message(pid_t pid_client)
 {
 	write(1, "\n", 1);
 	ft_printf("MESSAGE FROM: %d\n", pid_client);
-	ft_printf("NEW MESSAGE >>\n");
+	ft_printf("\nNEW MESSAGE >>\n");
 }
 
 void	ft_get_signal_bonus(int signal, siginfo_t *info, void *context)
