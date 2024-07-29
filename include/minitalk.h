@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 17:16:53 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 17:17:00 by gkomba           ###   ########.fr       */
+/*   Created: 2024/07/27 17:18:00 by gkomba            #+#    #+#             */
+/*   Updated: 2024/07/27 17:18:37 by gkomba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-int	main(void)
-{
-	struct sigaction	data;
+# include "libft/libft.h"
+# include "ft_printf/ft_printf.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <signal.h>
+# include <stdlib.h>
 
-	data.sa_sigaction = &ft_get_signal;
-	data.sa_flags = SA_SIGINFO;
-	ft_printf("PID: %d\n", getpid());
-	sigaction(SIGUSR2, &data, NULL);
-	sigaction(SIGUSR1, &data, NULL);
-	printf("\t\t<<WELCOME>>\n");
-	while (1)
-		;
-}
+void	ft_get_signal(int signal, siginfo_t *info, void *context);
+void	ft_send_bit(pid_t pid, unsigned char chr);
+void	ft_send_signal(pid_t pid, char *str);
+void	ft_recived(int signal);
+
+#endif
