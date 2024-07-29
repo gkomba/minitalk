@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_server.c                                     :+:      :+:    :+:   */
+/*   ft_print_hexa_low.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 17:17:33 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 17:17:35 by gkomba           ###   ########.fr       */
+/*   Created: 2024/05/23 13:11:17 by gkomba            #+#    #+#             */
+/*   Updated: 2024/05/23 13:22:36 by gkomba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "ft_printf.h"
 
-void	ft_get_signal(int signal, siginfo_t *info)
+void	ft_print_hexa_low(unsigned long nbr, int *count)
 {
-	static char		c;
-	static int		i;
+	char	*base;
 
-	if (signal == SIGUSR2)
-		c = (c * 2);
-	else if (signal == SIGUSR1)
-		c = ((c * 2) + 1);
-	i++;
-	if (i == 8)
-	{
-		write(1, &c, 1);
-		if (c == '\0')
-		{
-			write(1, "\n", 1);
-			printf("%d\n", info->si_pid);
-		}
-		c = 0;
-		i = 0;
-	}
-	kill(info->si_pid, SIGUSR1);
+	base = "0123456789abcdef";
+	if (nbr > 15)
+		ft_print_hexa_low(nbr / 16, count);
+	ft_print_char((base[nbr % 16]), count);
 }

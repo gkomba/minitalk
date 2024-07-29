@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_server.c                                     :+:      :+:    :+:   */
+/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 17:17:33 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 17:17:35 by gkomba           ###   ########.fr       */
+/*   Created: 2024/05/22 15:10:47 by gkomba            #+#    #+#             */
+/*   Updated: 2024/05/22 17:34:24 by gkomba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "ft_printf.h"
 
-void	ft_get_signal(int signal, siginfo_t *info)
+void	ft_print_nbr(long nbr, int *count)
 {
-	static char		c;
-	static int		i;
-
-	if (signal == SIGUSR2)
-		c = (c * 2);
-	else if (signal == SIGUSR1)
-		c = ((c * 2) + 1);
-	i++;
-	if (i == 8)
+	if (nbr < 0)
 	{
-		write(1, &c, 1);
-		if (c == '\0')
-		{
-			write(1, "\n", 1);
-			printf("%d\n", info->si_pid);
-		}
-		c = 0;
-		i = 0;
+		ft_print_char('-', count);
+		nbr = -nbr;
+		ft_print_nbr(nbr, count);
 	}
-	kill(info->si_pid, SIGUSR1);
+	else if (nbr > 9)
+	{
+		ft_print_nbr(nbr / 10, count);
+		ft_print_nbr(nbr % 10, count);
+	}
+	else
+		ft_print_char(nbr + 48, count);
 }

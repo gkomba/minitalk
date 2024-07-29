@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_server.c                                     :+:      :+:    :+:   */
+/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 17:17:33 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 17:17:35 by gkomba           ###   ########.fr       */
+/*   Created: 2024/05/23 13:49:12 by gkomba            #+#    #+#             */
+/*   Updated: 2024/05/23 14:05:31 by gkomba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "ft_printf.h"
 
-void	ft_get_signal(int signal, siginfo_t *info)
+void	ft_print_pointer(void *add, int *count)
 {
-	static char		c;
-	static int		i;
+	char				*base;
+	unsigned long long	adress;
 
-	if (signal == SIGUSR2)
-		c = (c * 2);
-	else if (signal == SIGUSR1)
-		c = ((c * 2) + 1);
-	i++;
-	if (i == 8)
+	if (add == NULL)
 	{
-		write(1, &c, 1);
-		if (c == '\0')
-		{
-			write(1, "\n", 1);
-			printf("%d\n", info->si_pid);
-		}
-		c = 0;
-		i = 0;
-	}
-	kill(info->si_pid, SIGUSR1);
+		ft_print_string("(nil)", count);
+		return ;
+	}	
+	adress = (unsigned long long)add;
+	base = "0123456789abcdef";
+	ft_print_string("0x", count);
+	if (adress >= 16)
+		ft_print_hexa_low(adress / 16, count);
+	ft_print_char((base[adress % 16]), count);
 }

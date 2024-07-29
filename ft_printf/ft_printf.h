@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkomba <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 17:18:00 by gkomba            #+#    #+#             */
-/*   Updated: 2024/07/27 17:18:37 by gkomba           ###   ########.fr       */
+/*   Created: 2024/05/22 14:29:31 by gkomba            #+#    #+#             */
+/*   Updated: 2024/05/22 14:32:35 by gkomba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-# include <stdio.h>
 # include <unistd.h>
-# include <signal.h>
+# include <stdio.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
-void	ft_get_signal(int signal, siginfo_t *info);
-void	ft_send_bit(pid_t pid, unsigned char chr);
-void	ft_send_signal(pid_t pid, char *str);
-void	ft_recived(int signal);
+void	ft_print_char(int c, int *count);
+void	ft_print_string(char *str, int *count);
+void	ft_print_nbr(long nbr, int *count);
+void	ft_print_hexa_low(unsigned long nbr, int *count);
+void	ft_print_hexa_upper(unsigned long nbr, int *count);
+void	ft_print_u_nbr(long long nbr, int *count);
+void	ft_print_pointer(void *add, int *count);
+
+int		ft_printf(char const *format, ...);
 
 #endif
